@@ -1,0 +1,67 @@
+<%- include ('../layout/user-header') %>
+<body>
+        <form id="edit-form" action="/user/edit-product" method="post">
+            <div class="user-list admin-edit">
+                <h2>Edit Product</h2>
+                <input type="text" name="product_id" value="<%= product.product_id %>" class="inputHidden" hidden>
+                <div class="mb-3">
+                    <label for="input-product_name" class="form-label">Product name</label>
+                    <input type="name" class="form-control" id="input-name" name="product_name"
+                        value="<%= product.product_name %>">
+                </div>
+                <div class="mb-3">
+                    <label for="input-price" class="form-label">Price</label>
+                    <input type="name" class="form-control" id="input-price" name="price"
+                        value="<%= product.price %>">
+                </div>
+                <div class="mb-3">
+                    <label for="input-quantity" class="form-label">Quantity</label>
+                    <input type="email" class="form-control" id="input-quantity" name="quantity" value="<%= product.quantity %>">
+                </div>
+                    <div class="mb-3" style="margin-right: 30px;">
+                        <label for="input-image" class="form-label">Product Image</label>
+                        <input type="name" class="form-control" id="input-image" name="image"
+                            value="<%= product.image %>">
+                    </div>
+                <input type="hidden" name="_method" value="put">
+                <button id="btn-edit" type="submit" class="btn btn-primary">Edit</button>
+                <span class="notification"></span>
+            </div>
+           
+        </form>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript">
+            $("#btn-edit").on("click", function (event) {
+                event.preventDefault();
+                var product_name = $('#input-product_name').val();
+                var price = $('#input-price').val();
+                var quantity = $('#input-quantity').val();
+                var image = $('#input-image').val();
+                if (product_name == '' || price == '' || quantity == '' || image == '') {
+                    alert('Empty input')
+                } else {
+
+                    $.ajax({
+                        url: `/user/edit-product`,
+                        method: 'put',
+                        data: {product_id:product_id, product_name: product_name, price: price, quantity: quantity, image: image},
+                        success: function (data, textStatus, xhr) {
+                            if (xhr.status == 200 || xhr.status == '200') {                        
+                                $('.notification').html(`Update done!`)
+                            } else {
+                                alert('Some error occurred try again');
+                            }
+                        },
+                        error: function (response) {
+                            error.html(`${response.responseJSON.message}`);
+                        }
+
+                    });
+
+                    
+                }
+            })
+        </script>
+
+    </body>

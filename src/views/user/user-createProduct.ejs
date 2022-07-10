@@ -1,0 +1,76 @@
+<%- include ('../layout/user-header') %>
+
+  <div id="error" class="text-center text-danger"></div>
+  <form class="create-product" id="input-form" method="post" action="/user/create-product">
+    <h2>Create Product</h2>
+    <div class="mb-3">
+      <label for="product_name" class="form-label">Product Name</label>
+      <input type="text" class="form-control" id="product_name" name="product_name">
+    </div>
+
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" class="form-control" id="quantity" name="quantity">
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" class="form-control" id="price" name="price">
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Image</label>
+      <input type="text" class="form-control" id="image" name="image">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#input-form").on("submit", function (event) {
+        event.preventDefault();
+        var product_name = $("#product_name").val();
+        var quantity = $("#quantity").val();
+        var price = $("#price").val();
+        var image = $("#image").val();
+        var error = $("#error");
+        error.html("");
+        if (product_name == "") {
+          error.html("Please in put your full name!");
+          return false;
+        }
+        if (quantity == "") {
+          error.html("Please in put your request type!");
+          return false;
+        }
+        if (price == "") {
+          error.html("Please in put your time off!");
+          return false;
+        }
+        if (image == "") {
+          error.html("Please in put quantity!");
+          return false;
+        }
+
+        $.ajax({
+          url: `/user/create-product`,
+          method: "POST",
+          data: { product_name: product_name, quantity: quantity, price: price, image: image},
+          success: function (data, textStatus, xhr) {
+            if (xhr.status == 200 || xhr.status == '200') {
+              alert('Create request successfully!')
+            } else {
+              alert('Some error occurred try again');
+            }
+          },
+          error: function (response) {
+            if (response.status == 401 || response.status == '401') {
+              location.replace("/login");
+            }
+          }
+        });
+      });
+    });
+  </script>

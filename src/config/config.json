@@ -1,0 +1,26 @@
+{
+    "development": {
+      "username": "postgres",
+      "password": "thanh612002",
+      "database": "selina",
+      "host": "127.0.0.1",
+      "dialect": "postgres",
+      "operatorsAliases": false
+    },
+    "test": {
+      "username": "postgres",
+      "password": "Huynbt",
+      "database": "nodejs",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    },
+    "production": {
+      "use_env_variable": "DATABASE_URL",
+      "dialectOptions": {
+        "ssl":{
+          "require":true,
+          "rejectUnauthorized":false
+        }
+      }
+    }
+  }
