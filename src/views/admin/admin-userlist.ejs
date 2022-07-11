@@ -30,9 +30,6 @@
 						<tr>
 							<th
 								class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-							</th>
-							<th
-								class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
 								User Name
 							</th>
 							<th
@@ -92,10 +89,13 @@
 							<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
 								<p class="text-gray-900 whitespace-no-wrap">
 									<a href="/admin/user-list/<%= users[i].user_id %>" >
-											<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">View</button>
-										</a>
-										<a href="/admin/edit-user?id=<%= users[i].user_id %>">
-											<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Edit</button>
+										<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">View</button>
+									</a>
+									<a href="/admin/edit-user?id=<%= users[i].user_id %>">
+										<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Edit</button>
+									</a>
+									<a>
+										<button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Delete</button>
 									</a>
 								</p>
 							</td>

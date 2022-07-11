@@ -57,6 +57,19 @@ class UserService {
             throw new Error();
         }
     }
+    async removeProduct(product_id) {
+        const productInDb = await this.productRepository.getById(product_id);
+        if (productInDb) {
+            await productInDb.destroy();
+            return await this.productRepository.getAll({
+                order: [
+                    ['product_id', 'ASC']
+                ]
+            })
+        } else {
+            throw new Error();
+        }
+    }
 }
 
 module.exports = UserService; 

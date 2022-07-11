@@ -55,7 +55,7 @@ class AdminService {
     }
 
     async getUserDetail(id) {
-        return await this.adminRepository.getAll({ where: {user_id: id} });
+        return await this.adminRepository.getAll({ where: {user_id: id}});
     }
 
     async getUserById(user_id){
@@ -86,6 +86,19 @@ class AdminService {
                 ['product_id', 'ASC']
             ]
         })
+    }
+    async removeUser(user_id) {
+        const userInDb = await this.adminRepository.getById(user_id);
+        if (userInDb) {
+            await userInDb.destroy();
+            return await this.adminRepository.getAll({
+                order: [
+                    ['user_id', 'ASC']
+                ]
+            })
+        } else {
+            throw new Error();
+        }
     }
 }
 

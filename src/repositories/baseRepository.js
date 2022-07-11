@@ -15,6 +15,9 @@ class BaseRepository {
     async getById(_id){
         return await this.model.findByPk(_id);
     }  
+    async remove(_id){
+        return await this.model.destroy({_id});
+    }
 
 }
 

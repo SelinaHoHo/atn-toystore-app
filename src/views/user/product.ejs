@@ -1,6 +1,7 @@
-<%- include ('../layout/user-header') %>
+<%- include ('../layout/layout-user') %>
 
-    <div class="bg-white p-8 rounded-md w-full">
+<body>   
+<div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
             <div>
                 <h2 class="text-gray-600 font-semibold">Products In System</h2>
@@ -17,9 +18,6 @@
                         placeholder="search...">
                 </div>
                 <div class="lg:ml-40 ml-10 space-x-8">
-                    <button
-                        class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">New
-                        Report</button>
                     <a href="/user/create-product">
                         <button
                          class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Create</button> </a>
@@ -46,10 +44,6 @@
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Store
-                                </th>
-                                <th
-                                    class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                     Image
                                 </th>
                                 <th
@@ -59,39 +53,38 @@
                             </tr>
                         </thead>
                         <tbody>
-                                    <% for(let i=0; i < product.length; i++) { %>
+                            <% for(let i=0; i < products.length; i++) { %>
                                 <tr>
-                                    <!-- <td><%= product[i].product_id %></td> -->
+                                    <!-- <td><%= products[i].product_id %></td> -->
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                             <p class="text-gray-900 whitespace-no-wrap">
-                                                <%= product[i].product_name %>
+                                                <%= products[i].product_name %>
                                             </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            <%= product[i].price %>
+                                            <%= products[i].price %>
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            <%= product[i].quantity %>
+                                            <%= products[i].quantity %>
+                                        </p>
+                                    </td>
+                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                                        <img class="rounded w-36 h-36" src="<%= products[i].image %>">
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                         <p class="text-gray-900 whitespace-no-wrap">
-                                            <%= product[i].user_id %>
+                                            <a href="/user/edit-product?id=<%= products[i].product_id %>">
+                                                <button class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Edit</button>
+                                            </a>
+                                            <a>
+                                                <button id="btn-delete" class="bg-indigo-600 px-4 py-2 rounded-md text-white font-semibold tracking-wide cursor-pointer">Delete</button>
+                                            </a>
                                         </p>
                                     </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                        <img class="rounded w-36 h-36" src="<%= product[i].image %>">
-                                        </p>
-                                    </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-								        <p class="text-gray-900 whitespace-no-wrap">
-									    <p><a href="/admin/edit-user">Edit</a> / <a href="#">Delete</a>
-									</p>
-								    </p>
-							        </td>
                                 </tr>
                                 <% } %>
                         </tbody>
@@ -100,43 +93,24 @@
             </div>
         </div>
     </div>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- <script type="text/javascript">
-        $('.filter-year').click(function (e) {
-            e.preventDefault();
-            var year = $('.history-year').val();
-            $.ajax({
-                url: `/user/view-history`,
-                method: 'post',
-                data: { time_off:year},
-                success: function (result, textStatus, xhr) {
-                    if (xhr.status == 200 || xhr.status == '200') {   
-                        var html= '';
-                                    for(let i=0; i < result.rq.length; i++) { 
-                                        html=html+`<tr class="txt">`
-                                            html+= `<td>`
-                                                html=html+result.rq[i].request_type;
-                                            html+=`</td>`;
-                                            html+=`<td class="time-off">`
-                                                html=html+result.rq[i].time_off;
-                                            html+=`</td>`;
-                                            html+=`<td>`
-                                                html=html+result.rq[i].quantity;
-                                            html+=`</td>`
-                                            html+=`<td>`
-                                                html=html+result.rq[i].content;
-                                            html+=`</td>`
-                                            html+=`<td>`
-                                                html=html+result.rq[i].status;
-                                            html+=`</td>`
-                                            html+=`</tr>`}
-                                    $('.tbody').html(html)    
+        <script type="text/javascript">
+            $("#btn-delete").on("click", function (event) {
+                    $.ajax({
+                        url: `/user/view-product`,
+                        method: 'get',
+                        data: {user_id:user_id, fullname: fullname, usename: usename, email: email, password: password },
+                        success: function (data, textStatus, xhr) {
+                            if (xhr.status == 200 || xhr.status == '200') {                        
+                                $('.notification').html(`Delete done!`)
                             } else {
                                 alert('Some error occurred try again');
                             }
-                }
-
-            });
-        })
-    </script> -->
+                        },
+                        error: function (response) {
+                            error.html(`${response.responseJSON.message}`);
+                        }
+                    });
+            })
+        </script>
+</body>

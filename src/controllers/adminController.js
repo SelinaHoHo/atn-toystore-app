@@ -101,6 +101,19 @@ const EditUser = async (req, res) => {
         res.status(500).json({ TRAVE: true, message: error });
     }
 }
+const removeUser = async (req, res) => {
+    try {
+        if (req.session.role == null || req.session.role == 'Storekeeper') {
+            res.status(400).json({ TRAVE: false, message: "Wrong user"});
+        }
+        const adminService = new AdminService();
+        const data = req.params.user_id;
+        await adminService.removeUser(data);
+        res.send();
+    } catch (error) {
+        res.status(500).json({ TRAVE: true, message: error });
+    }
+}
 
   
 module.exports = {
@@ -111,5 +124,6 @@ module.exports = {
     getEditUser,
     EditUser,
     getProductList,
-    getDashboard
+    getDashboard,
+    removeUser
 }

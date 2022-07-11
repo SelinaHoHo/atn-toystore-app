@@ -10,7 +10,8 @@ router.get('/create-user', adminController.getCreateUser)
 router.post('/create-user', adminController.createUser)
 router.get('/user-list/:user_id', adminController.userDetail)
 router.get('/edit-user', isSignedIn, adminController.getEditUser)
-router.put('/edit-user', isLoggedIn, adminController.EditUser)
+router.put('/user-list', isLoggedIn, adminController.EditUser)
 router.get('/product',isSignedIn, adminController.getProductList)
+router.get('/user-list/:user_id', isLoggedIn, adminController.removeUser);
 
 module.exports = router;
