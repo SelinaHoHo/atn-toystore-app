@@ -1,5 +1,4 @@
 <%- include ('../layout/layout-user') %>
-
 <body>   
 <div class="bg-white p-8 rounded-md w-full">
         <div class=" flex items-center justify-between pb-6">
@@ -110,6 +109,7 @@
                             } else {
                                 alert('Some error occurred try again');
                             }
+                            window.location.reload(true);
                         },
                         error: function (response) {
                             error.html(`${response.responseJSON.message}`);

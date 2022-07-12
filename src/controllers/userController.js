@@ -30,6 +30,7 @@ const userCreateProduct = async (req, res) => {
         const product = req.body;
         await userService.createNewProduct(product, req);
         res.send();
+        res.redirect('/user/product');
     } catch (error) {
         res.status(500).json({ TRAVE: true, message: error });
     }
@@ -42,7 +43,6 @@ const getProduct = async (req, res) => {
         }
         const userService = new UserService();
         const db = await userService.getUserProduct(req);
-        console.log(db)
         res.render('user/product', {
             products: db
         });
@@ -104,9 +104,9 @@ const removeProduct = async (req, res) => {
         }
         const userService = new UserService();
         const data = req.params.product_id;
-        console.log("=========================>",data)
         await userService.removeProduct(data);
         res.send();
+        res.redirect('/user/product');
     } catch (error) {
         res.status(500).json({ TRAVE: true, message: error });
     }
