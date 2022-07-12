@@ -104,6 +104,7 @@ const removeProduct = async (req, res) => {
         }
         const userService = new UserService();
         const data = req.params.product_id;
+        console.log("=========================>",data)
         await userService.removeProduct(data);
         res.send();
     } catch (error) {

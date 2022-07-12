@@ -11,6 +11,6 @@ router.post('/create-product', isLoggedIn, userController.userCreateProduct);
 router.get('/edit-product', isSignedIn, userController.getEditProduct);
 router.put('/view-product', isLoggedIn, userController.editProduct);
 // router.get('view-product/:product_id', userController.productDetail);
-router.get('view-product/:product_id', isLoggedIn, userController.removeProduct);
+router.get('/view-product/:product_id', isLoggedIn, userController.removeProduct);
 
 module.exports = router;

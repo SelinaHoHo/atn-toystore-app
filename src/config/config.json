@@ -1,14 +1,11 @@
 {
     "development": {
-      "username": "cloittggcixnju",
-      "password": "023232dc34167160b40dffdd1eaceca098fc3569b750e70ccc0a8d029549de65",
-      "database": "dcej5vetlog3r5",
-      "host": "ec2-54-227-248-71.compute-1.amazonaws.com",
+      "username": "postgres",
+      "password": "thanh612002",
+      "database": "selina",
+      "host": "127.0.0.1",
       "dialect": "postgres",
-      "port": "5432",
-      "ssl": {
-            "rejectUnauthorized": false
-        }
+      "operatorsAliases": false
     },
     "production": {
       "use_env_variable": "DATABASE_URL",
