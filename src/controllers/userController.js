@@ -30,7 +30,6 @@ const userCreateProduct = async (req, res) => {
         const product = req.body;
         await userService.createNewProduct(product, req);
         res.send();
-        res.redirect('/user/product');
     } catch (error) {
         res.status(500).json({ TRAVE: true, message: error });
     }
@@ -106,7 +105,6 @@ const removeProduct = async (req, res) => {
         const data = req.params.product_id;
         await userService.removeProduct(data);
         res.send();
-        res.redirect('/user/product');
     } catch (error) {
         res.status(500).json({ TRAVE: true, message: error });
     }
