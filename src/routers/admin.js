@@ -12,6 +12,6 @@ router.get('/user-list/detail/:user_id', adminController.userDetail)
 router.get('/edit-user', isSignedIn, adminController.getEditUser)
 router.put('/user-list', isLoggedIn, adminController.EditUser)
 router.get('/product',isSignedIn, adminController.getProductList)
-router.get('/user-list/:user_id', isLoggedIn, adminController.removeUser);
+router.get('/user-list/remove/:user_id', adminController.removeUser);
 
 module.exports = router;

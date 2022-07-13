@@ -38,7 +38,6 @@ const getUserList = async (req, res) => {
         const adminService = new AdminService();
         const data = req.body;
         const db = await adminService.getAllUser(data);
-        console.log(db)
         res.render('admin/admin-userlist', {
         users: db,
         })
@@ -109,7 +108,6 @@ const removeUser = async (req, res) => {
         }
         const adminService = new AdminService();
         const data = req.params.user_id;
-        console.log("=========================>",data)
         await adminService.removeUser(data);
         res.send();
     } catch (error) {

@@ -88,10 +88,10 @@ class AdminService {
         })
     }
     async removeUser(user_id) {
-        const userInDb = await this.userRepository.getById(user_id);
+        const userInDb = await this.adminRepository.getById(user_id);
         if (userInDb) {
             await userInDb.destroy();
-            return await this.userRepository.getAll({
+            return await this.adminRepository.getAll({
                 order: [
                     ['user_id', 'ASC']
                 ]
